@@ -2,9 +2,9 @@
 
 function getDb()
 {
-    static $db = null;
+    static $dbb = null;
     
-    if($db === null)
+    if($dbb === null)
     {
         try
         {
