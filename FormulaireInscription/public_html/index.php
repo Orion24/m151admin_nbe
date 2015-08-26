@@ -14,12 +14,12 @@ and open the template in the editor.
     <body>
         <h1>Formulaire d'inscription</h1>
         <form method="post" action="index.php" id="formInscription">
-            <label for="nom">Votre Nom</label> : <input type="text" name="nom" id="nom" maxlength="20" required /> <br />
-            <label for="prenom">Votre Prenom</label> : <input type="text" name="prenom" id="nom" maxlength="20" required /> <br />
+            <label for="nom">Votre Nom</label> : <input type="text" name="nom" id="nom" maxlength="50" required /> <br />
+            <label for="prenom">Votre Prenom</label> : <input type="text" name="prenom" id="nom" maxlength="30" required /> <br />
             <label for="pseudo">Votre Pseudo</label> : <input type="text" name="pseudo" id="pseudo" maxlength="20" required /> <br />
             <label for="pass">Votre mot de passe :</label><input type="password" name="pass" id="pass" required /> <br />
-            <label for="description">Mini description :</label><textarea name="description" id="description" maxlength="100" required ></textarea> <br />
-            <label for="email">Votre E-mail</label> : <input type="email" name="email" id="email" required /> <br />
+            <label for="description">Mini description :</label><textarea name="description" id="description" maxlength="100" ></textarea> <br />
+            <label for="email">Votre E-mail</label> : <input type="email" name="email" id="email" maxlength="200" required /> <br />
             <label for="date">Votre Date de naissance</label> : <input type="date" name="date" id="date" required /><br />
         </form>
     </body>
