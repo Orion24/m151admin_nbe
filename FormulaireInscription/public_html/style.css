@@ -8,3 +8,22 @@ and open the template in the editor.
     Author     : Administrateur
 */
 
+label
+{
+    display: block; /* La balise devient de type block. */
+    width: 150px;
+    float: left;
+}
+
+input
+{
+    margin-bottom: 10px;
+}
+
+#formInscription
+{
+    position: absolute;
+    width: 400px; 
+    left: 50%;
+    margin-left: -300px;
+}
