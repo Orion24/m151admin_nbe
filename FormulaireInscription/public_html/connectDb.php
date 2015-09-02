@@ -1,8 +1,8 @@
 <?php
-DEFINE(DB_HOST, "127.0.0.1");
-DEFINE(DB_NAME, "m151admin_nbe");
-DEFINE(DB_USER, "m151admin")
-DEFINE(DB_PASS, "m151admin");
+DEFINE('DB_HOST', "127.0.0.1");
+DEFINE('DB_NAME', "m151admin_nbe");
+DEFINE('DB_USER', "m151admin");
+DEFINE('DB_PASS', "m151admin");
 function getDb()
 {
     static $dbb = null;
