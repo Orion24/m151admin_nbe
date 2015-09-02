@@ -5,7 +5,46 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
 <?php
- include 'connectDb.php';
+    include 'functionDb.php';
+    $dbb = getDb();
+    function testArg($tab) //Check if there are empty cells
+    {
+        foreach($tab as $value)
+        {
+            if($value == $_POST['description'])
+            {
+                if(isset($value)) {
+                    continue;
+                }
+                else {
+                    return false;
+                }
+            }
+            if(isset($_POST[$value])) {
+                return false;
+            }
+        }
+        return true;
+    }
+    
+    function setData()
+    {
+        global $dbb;
+        $stmt = $dbb->prepare("INSERT INTO `m151admin_nbe`.`utilisateurs` (`idUtilisateur`, `nom`, `prenom`, `pseudo`, `motDePasse`, `description`, `email`, `dateNaissance`) VALUES (NULL, :lastname, :firstname, :pseudo, SHA1(:pass), :description, :email, :date)");
+        $stmt->bindParam(':lastname', $_POST['nom']);
+        $stmt->bindParam(':firstname', $_POST['prenom']);
+        $stmt->bindParam(':pseudo', $_POST['pseudo']);
+        $stmt->bindParam(':pass', $_POST['pass']);
+        $stmt->bindParam(':description', $_POST['description']);
+        $stmt->bindParam(':email', $_POST['email']);
+        $stmt->bindParam(':date', $_POST['date']);
+        $stmt->execute(); 
+    }
+
+    if(!empty($_POST) && testArg(['', '', '', '', '','','']))
+    {
+        setData();
+    }
 ?>
 <html>
     <head>
