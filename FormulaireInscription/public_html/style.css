@@ -26,4 +26,9 @@ input
     width: 400px; 
     left: 50%;
     margin-left: -300px;
+    background-color: grey;
+    border: 1px solid black;
+    padding-top: 10px;
+    padding-left: 5px;
+    border-radius: 15px;
 }
