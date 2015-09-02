@@ -21,7 +21,7 @@ and open the template in the editor.
             <label for="prenom">Votre Prenom</label> : <input type="text" name="prenom" id="nom" maxlength="30" required /> <br />
             <label for="pseudo">Votre Pseudo</label> : <input type="text" name="pseudo" id="pseudo" maxlength="20" required /> <br />
             <label for="pass">Votre mot de passe :</label><input type="password" name="pass" id="pass" required /> <br />
-            <label for="pass">Confirmer mot de passe :</label><input type="password" name="passconf" id="passconf" required /> <br />
+            <label for="passconf">Confirmer mot de passe :</label><input type="password" name="passconf" id="passconf" required /> <br />
             <label for="description">Mini description :</label><textarea name="description" id="description" maxlength="100" ></textarea> <br />
             <label for="email">Votre E-mail</label> : <input type="email" name="email" id="email" maxlength="200" required /> <br />
             <label for="date">Votre Date de naissance</label> : <input type="date" name="date" id="date" required /><br />
