@@ -39,7 +39,7 @@ and open the template in the editor.
         $stmt->execute(); 
     }
 
-    if(!empty($_REQUEST) && testArg(['', '', '', '', '','','']))
+    if(isset($_REQUEST['boutonEnvoyer']) && testArg(['', '', '', '', '','','']))
     {
         insertUser();
     }
@@ -62,7 +62,7 @@ and open the template in the editor.
             <label for="description">Mini description :</label><textarea name="description" id="description" maxlength="100" ></textarea> <br />
             <label for="email">Votre E-mail</label> : <input type="email" name="email" id="email" maxlength="200" required /> <br />
             <label for="date">Votre Date de naissance</label> : <input type="date" name="date" id="date" required /><br />
-            <input type="submit" value="Envoyer" />
+            <input type="submit" value="Envoyer" name="boutonEnvoyer"/>
         </form>
     </body>
 </html>
