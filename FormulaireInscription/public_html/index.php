@@ -28,15 +28,15 @@ and open the template in the editor.
     
     function insertUser()
     {
-        $stmt = getDb()->prepare("INSERT INTO `m151admin_nbe`.`utilisateurs` (`idUtilisateur`, `nom`, `prenom`, `pseudo`, `motDePasse`, `description`, `email`, `dateNaissance`) VALUES (NULL, :lastname, :firstname, :pseudo, SHA1(:pass), :description, :email, :date)");
-        $stmt->bindParam(':lastname', $_REQUEST['nom']);
-        $stmt->bindParam(':firstname', $_REQUEST['prenom']);
-        $stmt->bindParam(':pseudo', $_REQUEST['pseudo']);
-        $stmt->bindParam(':pass', $_REQUEST['pass']);
-        $stmt->bindParam(':description', $_REQUEST['description']);
-        $stmt->bindParam(':email', $_REQUEST['email']);
-        $stmt->bindParam(':date', $_REQUEST['date']);
-        $stmt->execute(); 
+        $request = getDb()->prepare("INSERT INTO `m151admin_nbe`.`utilisateurs` (`idUtilisateur`, `nom`, `prenom`, `pseudo`, `motDePasse`, `description`, `email`, `dateNaissance`) VALUES (NULL, :lastname, :firstname, :pseudo, SHA1(:pass), :description, :email, :date)");
+        $request->bindParam(':lastname', $_REQUEST['nom']);
+        $request->bindParam(':firstname', $_REQUEST['prenom']);
+        $request->bindParam(':pseudo', $_REQUEST['pseudo']);
+        $request->bindParam(':pass', $_REQUEST['pass']);
+        $request->bindParam(':description', $_REQUEST['description']);
+        $request->bindParam(':email', $_REQUEST['email']);
+        $request->bindParam(':date', $_REQUEST['date']);
+        $request->execute(); 
     }
     
     function getArrayUser()
