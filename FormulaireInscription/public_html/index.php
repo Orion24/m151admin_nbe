@@ -26,7 +26,7 @@ and open the template in the editor.
         return true;
     }
     
-    function setData()
+    function insertUser()
     {
         $stmt = getDb()->prepare("INSERT INTO `m151admin_nbe`.`utilisateurs` (`idUtilisateur`, `nom`, `prenom`, `pseudo`, `motDePasse`, `description`, `email`, `dateNaissance`) VALUES (NULL, :lastname, :firstname, :pseudo, SHA1(:pass), :description, :email, :date)");
         $stmt->bindParam(':lastname', $_POST['nom']);
@@ -41,7 +41,7 @@ and open the template in the editor.
 
     if(!empty($_POST) && testArg(['', '', '', '', '','','']))
     {
-        setData();
+        insertUser();
     }
 ?>
 <html>
