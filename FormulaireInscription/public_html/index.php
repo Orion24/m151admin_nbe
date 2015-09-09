@@ -1,9 +1,3 @@
-<!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
 <?php
     include 'functionDb.php';
     function testArg($tab) //Check if there are empty cells
@@ -39,27 +33,20 @@ and open the template in the editor.
         $request->execute(); 
     }
     
-    function getArrayUser()
-    {
-        $query = 'SELECT nom, prenom FROM utilisateurs';
-        $html = "";
-        $html .= "<table>";
-        foreach  (getDb()->query($query) as $row) 
-        {
-            $html .= "<tr>";
-            $html .= "<td>".$row['nom']."</td>";
-            $html .= "<td>".$row['prenom']."</td>";
-            $html .= "</tr>";
-        }
-        $html .= "</table";
-        return $html;
-    }
 
     if(isset($_REQUEST['boutonEnvoyer']) && testArg(['', '', '', '', '','','']))
     {
         insertUser();
+        header('Location: AffichageNom.php');
     }
 ?>
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
 <html>
     <head>
         <title>Fiche inscription utilisateur</title>
@@ -80,6 +67,6 @@ and open the template in the editor.
             <label for="date">Votre Date de naissance</label> : <input type="date" name="date" id="date" required /><br />
             <input type="submit" value="Envoyer" name="boutonEnvoyer"/>
         </form>
-        <?php echo getArrayUser() ?>
+        
     </body>
 </html>
