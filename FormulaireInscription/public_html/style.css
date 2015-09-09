@@ -32,3 +32,8 @@ input
     padding-left: 5px;
     border-radius: 15px;
 }
+body
+{
+    margin : 0 auto;
+    width : 410px;
+}
