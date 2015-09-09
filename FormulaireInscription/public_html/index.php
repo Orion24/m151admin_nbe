@@ -10,7 +10,7 @@ and open the template in the editor.
     {
         foreach($tab as $value)
         {
-            if($value == $_POST['description'])
+            if($value == $_REQUEST['description'])
             {
                 if(isset($value)) {
                     continue;
@@ -19,7 +19,7 @@ and open the template in the editor.
                     return false;
                 }
             }
-            if(isset($_POST[$value])) {
+            if(isset($_REQUEST[$value])) {
                 return false;
             }
         }
@@ -29,17 +29,17 @@ and open the template in the editor.
     function insertUser()
     {
         $stmt = getDb()->prepare("INSERT INTO `m151admin_nbe`.`utilisateurs` (`idUtilisateur`, `nom`, `prenom`, `pseudo`, `motDePasse`, `description`, `email`, `dateNaissance`) VALUES (NULL, :lastname, :firstname, :pseudo, SHA1(:pass), :description, :email, :date)");
-        $stmt->bindParam(':lastname', $_POST['nom']);
-        $stmt->bindParam(':firstname', $_POST['prenom']);
-        $stmt->bindParam(':pseudo', $_POST['pseudo']);
-        $stmt->bindParam(':pass', $_POST['pass']);
-        $stmt->bindParam(':description', $_POST['description']);
-        $stmt->bindParam(':email', $_POST['email']);
-        $stmt->bindParam(':date', $_POST['date']);
+        $stmt->bindParam(':lastname', $_REQUEST['nom']);
+        $stmt->bindParam(':firstname', $_REQUEST['prenom']);
+        $stmt->bindParam(':pseudo', $_REQUEST['pseudo']);
+        $stmt->bindParam(':pass', $_REQUEST['pass']);
+        $stmt->bindParam(':description', $_REQUEST['description']);
+        $stmt->bindParam(':email', $_REQUEST['email']);
+        $stmt->bindParam(':date', $_REQUEST['date']);
         $stmt->execute(); 
     }
 
-    if(!empty($_POST) && testArg(['', '', '', '', '','','']))
+    if(!empty($_REQUEST) && testArg(['', '', '', '', '','','']))
     {
         insertUser();
     }
