@@ -43,6 +43,7 @@ and open the template in the editor.
     {
         $query = 'SELECT nom, prenom FROM utilisateurs';
         $html = "";
+        $html .= "<table>";
         foreach  (getDb()->query($query) as $row) 
         {
             $html .= "<tr>";
@@ -50,6 +51,7 @@ and open the template in the editor.
             $html .= "<td>".$row['prenom']."</td>";
             $html .= "</tr>";
         }
+        $html .= "</table";
         return $html;
     }
 
@@ -78,8 +80,6 @@ and open the template in the editor.
             <label for="date">Votre Date de naissance</label> : <input type="date" name="date" id="date" required /><br />
             <input type="submit" value="Envoyer" name="boutonEnvoyer"/>
         </form>
-        <table>
-            <?php echo getArrayUser() ?>
-        </table>
+        <?php echo getArrayUser() ?>
     </body>
 </html>
