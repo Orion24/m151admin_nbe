@@ -1,22 +1,26 @@
 <?php
     include 'functionDb.php';
     function getArrayUser()
+    {       
+        $html = "";
+        $html .= '<table border="1px solid black">';
+        $html .= "<th>Nom</th>";
+        $html .= "<th>Prenom</th>";
+        foreach  (getUser() as $row) 
         {
-            $query = 'SELECT nom, prenom FROM utilisateurs';
-            $html = "";
-            $html .= '<table border="1px solid black">';
-            $html .= "<th>Nom</th>";
-            $html .= "<th>Prenom</th>";
-            foreach  (getDb()->query($query) as $row) 
-            {
-                $html .= "<tr>";               
-                $html .= "<td>".$row['nom']."</td>";
-                $html .= "<td>".$row['prenom']."</td>";
-                $html .= "</tr>";
-            }
-            $html .= "</table";
-            return $html;
+            $html .= "<tr>";               
+            $html .= "<td>".$row['nom']."</td>";
+            $html .= "<td>".$row['prenom']."</td>";
+            $html .= "</tr>";
         }
+        $html .= "</table";
+        return $html;
+    }
+    function getUser()
+    {
+       $query = 'SELECT nom, prenom FROM utilisateurs';
+       return getDb()->query($query);
+    }
 ?>
 <!DOCTYPE html>
 <!--
