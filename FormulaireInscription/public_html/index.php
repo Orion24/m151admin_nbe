@@ -38,6 +38,20 @@ and open the template in the editor.
         $stmt->bindParam(':date', $_REQUEST['date']);
         $stmt->execute(); 
     }
+    
+    function getArrayUser()
+    {
+        $query = 'SELECT nom, prenom FROM utilisateurs';
+        $html = "";
+        foreach  (getDb()->query($query) as $row) 
+        {
+            $html .= "<tr>";
+            $html .= "<td>".$row['nom']."</td>";
+            $html .= "<td>".$row['prenom']."</td>";
+            $html .= "</tr>";
+        }
+        return $html;
+    }
 
     if(isset($_REQUEST['boutonEnvoyer']) && testArg(['', '', '', '', '','','']))
     {
@@ -64,5 +78,8 @@ and open the template in the editor.
             <label for="date">Votre Date de naissance</label> : <input type="date" name="date" id="date" required /><br />
             <input type="submit" value="Envoyer" name="boutonEnvoyer"/>
         </form>
+        <table>
+            <?php echo getArrayUser() ?>
+        </table>
     </body>
 </html>
