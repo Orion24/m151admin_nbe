@@ -3,7 +3,7 @@
     function getArrayUser()
     {       
         $html = "";
-        $html .= '<table border="1px solid black">';
+        $html .= '<table style="border-collapse: collapse;border:1px solid black;">';
         $html .= "<th>Nom</th>";
         $html .= "<th>Prenom</th>";
         foreach  (getUser() as $row) 
