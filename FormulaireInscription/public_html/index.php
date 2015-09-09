@@ -6,7 +6,6 @@ and open the template in the editor.
 -->
 <?php
     include 'functionDb.php';
-    $dbb = getDb();
     function testArg($tab) //Check if there are empty cells
     {
         foreach($tab as $value)
@@ -29,8 +28,7 @@ and open the template in the editor.
     
     function setData()
     {
-        global $dbb;
-        $stmt = $dbb->prepare("INSERT INTO `m151admin_nbe`.`utilisateurs` (`idUtilisateur`, `nom`, `prenom`, `pseudo`, `motDePasse`, `description`, `email`, `dateNaissance`) VALUES (NULL, :lastname, :firstname, :pseudo, SHA1(:pass), :description, :email, :date)");
+        $stmt = getDb()->prepare("INSERT INTO `m151admin_nbe`.`utilisateurs` (`idUtilisateur`, `nom`, `prenom`, `pseudo`, `motDePasse`, `description`, `email`, `dateNaissance`) VALUES (NULL, :lastname, :firstname, :pseudo, SHA1(:pass), :description, :email, :date)");
         $stmt->bindParam(':lastname', $_POST['nom']);
         $stmt->bindParam(':firstname', $_POST['prenom']);
         $stmt->bindParam(':pseudo', $_POST['pseudo']);
