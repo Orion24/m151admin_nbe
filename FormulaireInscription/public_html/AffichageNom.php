@@ -7,6 +7,7 @@
         $html .= "<th>Nom</th>";
         $html .= "<th>Prenom</th>";
         $html .= "<th>Détail</th>";
+        $html .= "<th>Modification</th>";
         foreach  (getListUsers() as $row) 
         {
             $html .= "<tr>";               
