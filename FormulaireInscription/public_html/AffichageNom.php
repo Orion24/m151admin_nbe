@@ -29,17 +29,18 @@
     {
         if(isset($_REQUEST['value']) && is_numeric($_REQUEST['value'])) 
         {
-            $query = 'SELECT nom, prenom, description, email, dateNaissance FROM utilisateurs WHERE idUtilisateur='.$_REQUEST['value'];
+            $query = 'SELECT nom, prenom, pseudo, description, email, dateNaissance FROM utilisateurs WHERE idUtilisateur='.$_REQUEST['value'];
             $answer = getDb()->query($query);//execute the query
             $tabUser = $answer->fetch(PDO::FETCH_ASSOC);//We make the answer an associotive array
             $html = "";
             if($tabUser != null)//if the user exist
             {
                 $html .= '<table style="border-collapse: collapse;border:1px solid black;">';
-                $html .= "<th>Nom</th><th>Prenom</th><th>Description</th><th>Email</th><th>Date de naissance</th>";
+                $html .= "<th>Nom</th><th>Prenom</th><th>Pseudo</th><th>Description</th><th>Email</th><th>Date de naissance</th>";
                 $html .= "<tr>";
                 $html .= "<td>".$tabUser['nom']."</td>";
                 $html .= "<td>".$tabUser['prenom']."</td>";
+                $html .= "<td>".$tabUser['pseudo']."</td>";
                 $html .= "<td>".$tabUser['description']."</td>";
                 $html .= "<td>".$tabUser['email']."</td>";
                 $html .= "<td>".$tabUser['dateNaissance']."</td>";
