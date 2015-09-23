@@ -28,23 +28,23 @@
         return true;
     }
     
-    function insertUser()
+    function insertUser($lastname, $firstname, $pseudo, $pass, $description, $email, $date)
     {
         $request = getDb()->prepare("INSERT INTO `m151admin_nbe`.`utilisateurs` (`idUtilisateur`, `nom`, `prenom`, `pseudo`, `motDePasse`, `description`, `email`, `dateNaissance`) VALUES (NULL, :lastname, :firstname, :pseudo, SHA1(:pass), :description, :email, :date)");
-        $request->bindParam(':lastname', $_REQUEST['nom']);
-        $request->bindParam(':firstname', $_REQUEST['prenom']);
-        $request->bindParam(':pseudo', $_REQUEST['pseudo']);
-        $request->bindParam(':pass', $_REQUEST['pass']);
-        $request->bindParam(':description', $_REQUEST['description']);
-        $request->bindParam(':email', $_REQUEST['email']);
-        $request->bindParam(':date', $_REQUEST['date']);
+        $request->bindParam(':lastname', $lastname);
+        $request->bindParam(':firstname', $firstname);
+        $request->bindParam(':pseudo', $pseudo);
+        $request->bindParam(':pass', $pass);
+        $request->bindParam(':description', $description);
+        $request->bindParam(':email', $email);
+        $request->bindParam(':date', $date);
         $request->execute(); 
     }
     
 
     if(isset($_REQUEST['boutonEnvoyer']) && testArg(['', '', '', '', '','','']))
     {
-        insertUser();
+        insertUser( $_REQUEST['nom'], $_REQUEST['prenom'], $_REQUEST['pseudo'], $_REQUEST['pass'], $_REQUEST['description'], $_REQUEST['email'], $_REQUEST['date']);
         header('Location: AffichageNom.php');
     }
     
