@@ -13,6 +13,7 @@
             $html .= "<td>".$row['nom']."</td>";
             $html .= "<td>".$row['prenom']."</td>";
             $html .= "<td><a href=\"http://127.0.0.1/siteInscription/AffichageNom.php?value=".$row['idUtilisateur']."\">détail</a>";
+            $html .= "<td><a href=\"http://127.0.0.1/siteInscription?value=".$row['idUtilisateur']."\">modification</a>";
             $html .= "</tr>";
         }
         $html .= "</table>";
@@ -32,16 +33,19 @@
             $answer = getDb()->query($query);//execute the query
             $tabUser = $answer->fetch(PDO::FETCH_ASSOC);//We make the answer an associotive array
             $html = "";
-            $html .= '<table style="border-collapse: collapse;border:1px solid black;">';
-            $html .= "<th>Nom</th><th>Prenom</th><th>Description</th><th>Email</th><th>Date de naissance</th>";
-            $html .= "<tr>";
-            $html .= "<td>".$tabUser['nom']."</td>";
-            $html .= "<td>".$tabUser['prenom']."</td>";
-            $html .= "<td>".$tabUser['description']."</td>";
-            $html .= "<td>".$tabUser['email']."</td>";
-            $html .= "<td>".$tabUser['dateNaissance']."</td>";
-            $html .= "</tr>";
-            $html .= "</table>";
+            if($tabUser != null)//if the user exist
+            {
+                $html .= '<table style="border-collapse: collapse;border:1px solid black;">';
+                $html .= "<th>Nom</th><th>Prenom</th><th>Description</th><th>Email</th><th>Date de naissance</th>";
+                $html .= "<tr>";
+                $html .= "<td>".$tabUser['nom']."</td>";
+                $html .= "<td>".$tabUser['prenom']."</td>";
+                $html .= "<td>".$tabUser['description']."</td>";
+                $html .= "<td>".$tabUser['email']."</td>";
+                $html .= "<td>".$tabUser['dateNaissance']."</td>";
+                $html .= "</tr>";
+                $html .= "</table>";
+            }
             return $html;
         }
     }
