@@ -6,7 +6,7 @@
     $pseudo = "";
     $email = "";
     $dateDeNaissance = "";
-    $idUser = "Envoyer";
+    $idUser;
     
     function testArg($tab) //Check if there are empty cells
     {
@@ -61,7 +61,13 @@
         $request->execute();
     }
 
-    if(isset($_REQUEST['boutonEnvoyer']) && testArg(['', '', '', '', '','','']) && !is_numeric($_REQUEST['idUser']))
+    if(isset($_REQUEST['idUser']) && is_numeric($_REQUEST['idUser']) && testArg(['', '', '', '', '','','']))
+    {
+        modifyUser($_REQUEST['nom'], $_REQUEST['prenom'], $_REQUEST['pseudo'], $_REQUEST['pass'], $_REQUEST['description'], $_REQUEST['email'], $_REQUEST['date'], $_REQUEST['idUser']);
+        header('Location: AffichageNom.php');
+    }
+    
+    if(isset($_REQUEST['boutonEnvoyer']) && testArg(['', '', '', '', '','','']))
     {
         insertUser( $_REQUEST['nom'], $_REQUEST['prenom'], $_REQUEST['pseudo'], $_REQUEST['pass'], $_REQUEST['description'], $_REQUEST['email'], $_REQUEST['date']);
         header('Location: AffichageNom.php');
@@ -77,13 +83,7 @@
         $email = $tabInfoUser['email'];
         $dateDeNaissance = $tabInfoUser['dateNaissance'];
         $idUser = $_REQUEST['value'];
-    }
-    
-    if(isset($_REQUEST['idUser']) && is_numeric($_REQUEST['idUser']) && testArg(['', '', '', '', '','','']))
-    {
-        modifyUser($_REQUEST['nom'], $_REQUEST['prenom'], $_REQUEST['pseudo'], $_REQUEST['pass'], $_REQUEST['description'], $_REQUEST['email'], $_REQUEST['date'], $_REQUEST['idUser']);
-        header('Location: AffichageNom.php');
-    }
+    }   
 ?>
 <!DOCTYPE html>
 <!--
