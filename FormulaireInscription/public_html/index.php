@@ -6,7 +6,7 @@
     $pseudo = "";
     $email = "";
     $dateDeNaissance = "";
-    $modification = false;
+    $idUser = "Envoyer";
     
     function testArg($tab) //Check if there are empty cells
     {
@@ -41,13 +41,6 @@
         $request->execute(); 
     }
     
-
-    if(isset($_REQUEST['boutonEnvoyer']) && testArg(['', '', '', '', '','','']))
-    {
-        insertUser( $_REQUEST['nom'], $_REQUEST['prenom'], $_REQUEST['pseudo'], $_REQUEST['pass'], $_REQUEST['description'], $_REQUEST['email'], $_REQUEST['date']);
-        header('Location: AffichageNom.php');
-    }
-    
     function getInfoUser($idUser)
     {
         $query = 'SELECT nom, prenom, description, pseudo, email, dateNaissance FROM utilisateurs WHERE idUtilisateur='.$idUser;
@@ -55,9 +48,27 @@
         return $answer->fetch(PDO::FETCH_ASSOC);//We make the answer an associotive array
     }
     
+    function modifyUser($lastname, $firstname, $pseudo, $pass, $description, $email, $date, $idUser)
+    {
+        $request = getDb()->prepare("UPDATE `m151admin_nbe`.`utilisateurs` SET `nom` = :lastname, `prenom` = :firstname,  `pseudo` = :pseudo, `motDePasse` = SHA1(:pass), `description` = :description, `email` = :email, `dateNaissance` = :date WHERE `utilisateurs`.`idUtilisateur` = ".$idUser.";");
+        $request->bindParam(':lastname', $lastname);
+        $request->bindParam(':firstname', $firstname);
+        $request->bindParam(':pseudo', $pseudo);
+        $request->bindParam(':pass', $pass);
+        $request->bindParam(':description', $description);
+        $request->bindParam(':email', $email);
+        $request->bindParam(':date', $date);
+        $request->execute();
+    }
+
+    if(isset($_REQUEST['boutonEnvoyer']) && testArg(['', '', '', '', '','','']) && !is_numeric($_REQUEST['idUser']))
+    {
+        insertUser( $_REQUEST['nom'], $_REQUEST['prenom'], $_REQUEST['pseudo'], $_REQUEST['pass'], $_REQUEST['description'], $_REQUEST['email'], $_REQUEST['date']);
+        header('Location: AffichageNom.php');
+    }
+    
     if(isset($_REQUEST['value']) && is_numeric($_REQUEST['value']))
     {
-        $modification = true;
         $tabInfoUser = getInfoUser($_REQUEST['value']);
         $nom = $tabInfoUser['nom'];
         $prenom = $tabInfoUser['prenom'];
@@ -65,6 +76,13 @@
         $description = $tabInfoUser['description'];
         $email = $tabInfoUser['email'];
         $dateDeNaissance = $tabInfoUser['dateNaissance'];
+        $idUser = $_REQUEST['value'];
+    }
+    
+    if(isset($_REQUEST['idUser']) && is_numeric($_REQUEST['idUser']) && testArg(['', '', '', '', '','','']))
+    {
+        modifyUser($_REQUEST['nom'], $_REQUEST['prenom'], $_REQUEST['pseudo'], $_REQUEST['pass'], $_REQUEST['description'], $_REQUEST['email'], $_REQUEST['date'], $_REQUEST['idUser']);
+        header('Location: AffichageNom.php');
     }
 ?>
 <!DOCTYPE html>
@@ -93,6 +111,7 @@ and open the template in the editor.
             <label for="email">Votre E-mail</label> : <input type="email" name="email" id="email" maxlength="200" value="<?= $email ?>" required /> <br />
             <label for="date">Votre Date de naissance</label> : <input type="date" name="date" id="date" value="<?= $dateDeNaissance ?>" required /><br />
             <input type="submit" value="Envoyer" name="boutonEnvoyer"/>
+            <input type="hidden" value="<?= $idUser ?>" name="idUser"/>
         </form>
         
     </body>
