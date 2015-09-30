@@ -112,7 +112,7 @@ and open the template in the editor.
             <label for="date">Votre Date de naissance</label> : <input type="date" name="date" id="date" value="<?= $dateDeNaissance ?>" required /><br />
             <input type="submit" value="Envoyer" name="boutonEnvoyer"/>
             <input type="hidden" value="<?= $idUser ?>" name="idUser"/>
-        </form>
-        
+            <a href="./AffichageNom.php" >Liste des utilisateurs</a>
+        </form>      
     </body>
 </html>
