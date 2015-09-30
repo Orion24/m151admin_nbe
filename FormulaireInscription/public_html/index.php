@@ -28,38 +28,11 @@
         return true;
     }
     
-    function insertUser($lastname, $firstname, $pseudo, $pass, $description, $email, $date)
-    {
-        $request = getDb()->prepare("INSERT INTO `m151admin_nbe`.`utilisateurs` (`idUtilisateur`, `nom`, `prenom`, `pseudo`, `motDePasse`, `description`, `email`, `dateNaissance`) VALUES (NULL, :lastname, :firstname, :pseudo, SHA1(:pass), :description, :email, :date)");
-        $request->bindParam(':lastname', $lastname);
-        $request->bindParam(':firstname', $firstname);
-        $request->bindParam(':pseudo', $pseudo);
-        $request->bindParam(':pass', $pass);
-        $request->bindParam(':description', $description);
-        $request->bindParam(':email', $email);
-        $request->bindParam(':date', $date);
-        $request->execute(); 
-    }
+
     
-    function getInfoUser($idUser)
-    {
-        $query = 'SELECT nom, prenom, description, pseudo, email, dateNaissance FROM utilisateurs WHERE idUtilisateur='.$idUser;
-        $answer = getDb()->query($query);//execute the query
-        return $answer->fetch(PDO::FETCH_ASSOC);//We make the answer an associotive array
-    }
+
     
-    function modifyUser($lastname, $firstname, $pseudo, $pass, $description, $email, $date, $idUser)
-    {
-        $request = getDb()->prepare("UPDATE `m151admin_nbe`.`utilisateurs` SET `nom` = :lastname, `prenom` = :firstname,  `pseudo` = :pseudo, `motDePasse` = SHA1(:pass), `description` = :description, `email` = :email, `dateNaissance` = :date WHERE `utilisateurs`.`idUtilisateur` = ".$idUser.";");
-        $request->bindParam(':lastname', $lastname);
-        $request->bindParam(':firstname', $firstname);
-        $request->bindParam(':pseudo', $pseudo);
-        $request->bindParam(':pass', $pass);
-        $request->bindParam(':description', $description);
-        $request->bindParam(':email', $email);
-        $request->bindParam(':date', $date);
-        $request->execute();
-    }
+
 
     if(isset($_REQUEST['idUser']) && is_numeric($_REQUEST['idUser']) && testArg(['', '', '', '', '','','']))
     {
