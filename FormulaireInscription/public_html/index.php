@@ -27,13 +27,6 @@
         }
         return true;
     }
-    
-
-    
-
-    
-
-
     if(isset($_REQUEST['idUser']) && is_numeric($_REQUEST['idUser']) && testArg(['', '', '', '', '','','']))
     {
         modifyUser($_REQUEST['nom'], $_REQUEST['prenom'], $_REQUEST['pseudo'], $_REQUEST['pass'], $_REQUEST['description'], $_REQUEST['email'], $_REQUEST['date'], $_REQUEST['idUser']);
@@ -86,6 +79,7 @@ and open the template in the editor.
             <input type="submit" value="Envoyer" name="boutonEnvoyer"/>
             <input type="hidden" value="<?= $idUser ?>" name="idUser"/>
             <a href="./AffichageNom.php" >Liste des utilisateurs</a>
+            <a href="./login.php">Connexion</a>
         </form>      
     </body>
 </html>
