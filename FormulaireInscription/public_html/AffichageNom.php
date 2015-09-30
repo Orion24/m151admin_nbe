@@ -8,6 +8,7 @@
         $html .= "<th>Prenom</th>";
         $html .= "<th>Détail</th>";
         $html .= "<th>Modification</th>";
+        $html .= "<th>Suppresion</th>";
         foreach  (getListUsers() as $row) 
         {
             $html .= "<tr>";               
@@ -15,6 +16,7 @@
             $html .= "<td>".$row['prenom']."</td>";
             $html .= "<td><a href=\"http://127.0.0.1/siteInscription/AffichageNom.php?value=".$row['idUtilisateur']."\">détail</a>";
             $html .= "<td><a href=\"http://127.0.0.1/siteInscription?value=".$row['idUtilisateur']."\">modification</a>";
+            $html .= "<td><a href=\"http://127.0.0.1/siteInscription/AffichageNom.php?delete=".$row['idUtilisateur']."\">suppression</a>";
             $html .= "</tr>";
         }
         $html .= "</table>";
@@ -38,18 +40,26 @@
             {
                 $html .= '<table style="border-collapse: collapse;border:1px solid black;">';
                 $html .= "<th>Nom</th><th>Prenom</th><th>Pseudo</th><th>Description</th><th>Email</th><th>Date de naissance</th>";
-                $html .= "<tr>";
-                $html .= "<td>".$tabUser['nom']."</td>";
+                $html .= "<tr><td>".$tabUser['nom']."</td>";
                 $html .= "<td>".$tabUser['prenom']."</td>";
                 $html .= "<td>".$tabUser['pseudo']."</td>";
                 $html .= "<td>".$tabUser['description']."</td>";
                 $html .= "<td>".$tabUser['email']."</td>";
-                $html .= "<td>".$tabUser['dateNaissance']."</td>";
-                $html .= "</tr>";
-                $html .= "</table>";
+                $html .= "<td>".$tabUser['dateNaissance']."</td></tr></table>";
             }
             return $html;
         }
+    }
+    
+    function deleteUser($idUser)
+    {
+        $request = getDb()->prepare("DELETE FROM `m151admin_nbe`.`utilisateurs` WHERE `utilisateurs`.`idUtilisateur` = :idUser");
+        $request->bindParam(':idUser', $idUser);
+        $request->execute();
+    }
+    if(isset($_REQUEST['delete']) && is_numeric($_REQUEST['delete']))
+    {
+        deleteUser($_REQUEST['delete']);
     }
 ?>
 <!DOCTYPE html>
