@@ -1,6 +1,17 @@
 <?php
-
-
+    include 'functionDb.php';
+    if(isset($_REQUEST['login']))
+    {
+        $tablog = $_REQUEST['login'];
+        if(login($tablog['pseudo'], $tablog['pass']))
+        {
+            session_start();
+            if (!isset($_SESSION['user']))
+            {
+                $_SESSION['count'] = $tablog['pseudo'];
+            } 
+        }
+    }
 ?>
 <!DOCTYPE html>
 <!--
@@ -18,8 +29,9 @@ and open the template in the editor.
     <body>
         <h1>Login</h1>
         <form method="post" action="login.php" id="formInscription">
-            <label for="pseudo">Votre pseudo</label> : <input type="text" name="nom" id="nom" maxlength="50" required value="<?= $nom ?>"/> <br />
+            <label for="pseudo">Votre pseudo :</label><input type="text" name="nom" id="nom" maxlength="50" required value="<?= $nom ?>"/> <br />
             <label for="pass">Votre mot de passe :</label><input type="password" name="pass" id="pass" required /> <br />
+            <input type="submit" value="Envoyer" name="login"/>
         </form>
     </body>
 </html>
