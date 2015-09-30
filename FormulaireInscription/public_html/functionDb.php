@@ -52,3 +52,10 @@ function getInfoUser($idUser)
         $answer = getDb()->query($query);//execute the query
         return $answer->fetch(PDO::FETCH_ASSOC);//We make the answer an associotive array
     }
+function login($username, $pass)
+    {
+        $request = getDb()->prepare("SELECT pseudo, motDePasse FROM utilisateurs WHERE pseudo = :pseudo AND motDePasse = SHA1(:pass)");
+        $request->bindParam(':pseudo', $username);
+        $request->bindParam(':pass', $pass);
+        return $request->execute();
+    }
