@@ -8,7 +8,8 @@
             session_start();
             if (!isset($_SESSION['user']))
             {
-                $_SESSION['count'] = $tablog['pseudo'];
+                $_SESSION['user'] = $tablog['pseudo'];
+                header('Location: ./AfichageNom.php');
             } 
         }
     }

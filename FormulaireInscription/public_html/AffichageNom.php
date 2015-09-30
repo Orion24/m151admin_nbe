@@ -1,4 +1,10 @@
 <?php
+    session_start();
+    if(empty($_SESSION['user']))
+    {
+        session_write_close(); //For to be sure
+        header('Location: ./index.php');
+    }
     include 'functionDb.php';
     function getArrayUser()
     {       
