@@ -80,6 +80,6 @@ and open the template in the editor.
             echo getArrayUser();
             echo getUser();
         ?>
-        
+        <a href="index.php">Formulaire d'inscription</a>
     </body>
 </html>
