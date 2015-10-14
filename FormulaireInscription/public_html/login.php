@@ -5,6 +5,7 @@ if (isset($_REQUEST['login'])) {
     
     $tablog = $_REQUEST['login'];
     $userlogin = login($_REQUEST['nom'], $_REQUEST['pass']);
+    $nom = $_REQUEST['nom'];
 
     if (count($userlogin) > 0) {
         
