@@ -1,18 +1,18 @@
 <?php
-    include 'functionDb.php';
-    if(isset($_REQUEST['login']))
-    {
-        $tablog = $_REQUEST['login'];
-        if(login($tablog['pseudo'], $tablog['pass']))
-        {
-            session_start();
-            if (!isset($_SESSION['user']))
-            {
-                $_SESSION['user'] = $tablog['pseudo'];
-                header('Location: ./AfichageNom.php');
-            } 
-        }
+include 'functionDb.php';
+$nom = "";
+if (isset($_REQUEST['login'])) {
+    
+    $tablog = $_REQUEST['login'];
+    $userlogin = login($_REQUEST['nom'], $_REQUEST['pass']);
+
+    if (count($userlogin) > 0) {
+        
+        session_start();
+        $_SESSION['user'] = $_REQUEST['nom'];
+        header('Location: ./AffichageNom.php');
     }
+}
 ?>
 <!DOCTYPE html>
 <!--

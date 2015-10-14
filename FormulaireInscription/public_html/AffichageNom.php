@@ -2,8 +2,8 @@
     session_start();
     if(empty($_SESSION['user']))
     {
-        session_write_close(); //For to be sure
-        header('Location: ./index.php');
+        session_write_close(); // to be sure
+        header('Location: ./login.php');
     }
     
     include 'functionDb.php';
