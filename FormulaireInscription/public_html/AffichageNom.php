@@ -6,6 +6,13 @@
         header('Location: ./login.php');
     }
     
+    if(isset($_REQUEST['deconnect']) && $_REQUEST['deconnect'] == "yes")
+    {
+        $_SESSION['user'] = array();
+        session_destroy();
+        header('Location: ./index.php');
+    }
+    
     include 'functionDb.php';
     function getArrayUser()
     {       
@@ -88,5 +95,6 @@ and open the template in the editor.
             echo getUser();
         ?>
         <a href="index.php">Formulaire d'inscription</a>
+        <a href="AffichageNom.php?deconnect=yes">Se déconnecter</a>
     </body>
 </html>
