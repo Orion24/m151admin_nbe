@@ -20,7 +20,7 @@ function getDb() {
 }
 
 function insertUser($lastname, $firstname, $pseudo, $pass, $description, $email, $date) {
-    $request = getDb()->prepare("INSERT INTO `m151admin_nbe`.`utilisateurs` (`idUtilisateur`, `nom`, `prenom`, `pseudo`, `motDePasse`, `description`, `email`, `dateNaissance`) VALUES (NULL, :lastname, :firstname, :pseudo, SHA1(:pass), :description, :email, :date)");
+    $request = getDb()->prepare("INSERT INTO ".DB_NAME.".`utilisateurs` (`idUtilisateur`, `nom`, `prenom`, `pseudo`, `motDePasse`, `description`, `email`, `dateNaissance`) VALUES (NULL, :lastname, :firstname, :pseudo, SHA1(:pass), :description, :email, :date)");
     $request->bindParam(':lastname', $lastname, PDO::PARAM_STR);
     $request->bindParam(':firstname', $firstname, PDO::PARAM_STR);
     $request->bindParam(':pseudo', $pseudo, PDO::PARAM_STR);
@@ -32,7 +32,7 @@ function insertUser($lastname, $firstname, $pseudo, $pass, $description, $email,
 }
 
 function modifyUser($lastname, $firstname, $pseudo, $pass, $description, $email, $date, $idUser) {
-    $request = getDb()->prepare("UPDATE `m151admin_nbe`.`utilisateurs` SET `nom` = :lastname, `prenom` = :firstname,  `pseudo` = :pseudo, `motDePasse` = SHA1(:pass), `description` = :description, `email` = :email, `dateNaissance` = :date WHERE `utilisateurs`.`idUtilisateur` = " . $idUser . ";");
+    $request = getDb()->prepare("UPDATE ".DB_NAME.".`utilisateurs` SET `nom` = :lastname, `prenom` = :firstname,  `pseudo` = :pseudo, `motDePasse` = SHA1(:pass), `description` = :description, `email` = :email, `dateNaissance` = :date WHERE `utilisateurs`.`idUtilisateur` = " . $idUser . ";");
     $request->bindParam(':lastname', $lastname, PDO::PARAM_STR);
     $request->bindParam(':firstname', $firstname, PDO::PARAM_STR);
     $request->bindParam(':pseudo', $pseudo, PDO::PARAM_STR);
