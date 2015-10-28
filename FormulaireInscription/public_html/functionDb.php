@@ -50,9 +50,11 @@ function getInfoUser($idUser) {
 }
 
 function login($username, $pass) {
-    $request = getDb()->prepare("SELECT pseudo, motDePasse FROM utilisateurs WHERE pseudo = :pseudo AND motDePasse = SHA1(:pass)");
+    $request = getDb()->prepare("SELECT pseudo, motDePasse, isAdmin FROM utilisateurs WHERE pseudo = :pseudo AND motDePasse = SHA1(:pass)");
     $request->bindParam(':pseudo', $username);
     $request->bindParam(':pass', $pass);
     $request->execute();
-    return $request->fetchAll(PDO::FETCH_ASSOC);
+    return $request->fetch(PDO::FETCH_ASSOC);
 }
+
+
