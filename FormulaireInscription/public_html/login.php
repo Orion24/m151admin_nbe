@@ -3,7 +3,7 @@
     $nom = "";
     session_start();
 
-    if(isset($_SESSION['user']))
+    if(isset($_SESSION['nom']))
     {
         header('Location: ./AffichageNom.php');
     }
@@ -14,7 +14,8 @@
         $userlogin = login($_REQUEST['nom'], $_REQUEST['pass']);
         $nom = $_REQUEST['nom'];
         if (count($userlogin) > 0) {
-            $_SESSION['user'] = $_REQUEST['nom'];
+            $_SESSION['nom'] = $userlogin['pseudo'];
+            $_SESSION['isAdmin'] = $userlogin['isAdmin'];       
             header('Location: ./AffichageNom.php');
         }
     }
