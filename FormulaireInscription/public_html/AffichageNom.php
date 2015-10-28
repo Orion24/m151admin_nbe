@@ -1,6 +1,7 @@
 <?php
     session_start();
-    if(empty($_SESSION['user']))
+    //include_once 'functionDb.php';
+    if(empty($_SESSION['nom']))
     {
         session_write_close(); // to be sure
         header('Location: ./login.php');
@@ -8,7 +9,6 @@
     
     if(isset($_REQUEST['deconnect']) && $_REQUEST['deconnect'] == "yes")
     {
-        $_SESSION['user'] = array();
         session_destroy();
         header('Location: ./index.php');
     }
@@ -16,6 +16,7 @@
     include 'functionDb.php';
     function getArrayUser()
     {       
+        $isAdmin = $_SESSION['isAdmin'];
         $html = "";
         $html .= '<table style="border-collapse: collapse;border:1px solid black;">';
         $html .= "<th>Nom</th>";
@@ -29,8 +30,11 @@
             $html .= "<td>".$row['nom']."</td>";
             $html .= "<td>".$row['prenom']."</td>";
             $html .= "<td><a href=\"http://127.0.0.1/siteInscription/AffichageNom.php?value=".$row['idUtilisateur']."\">détail</a>";
-            $html .= "<td><a href=\"http://127.0.0.1/siteInscription?value=".$row['idUtilisateur']."\">modification</a>";
-            $html .= "<td><a href=\"http://127.0.0.1/siteInscription/AffichageNom.php?delete=".$row['idUtilisateur']."\">suppression</a>";
+            if($isAdmin==1 || $_SESSION['nom'] == $row['pseudo'])
+            {
+                $html .= "<td><a href=\"http://127.0.0.1/siteInscription?value=".$row['idUtilisateur']."\">modification</a>";
+                $html .= "<td><a href=\"http://127.0.0.1/siteInscription/AffichageNom.php?delete=".$row['idUtilisateur']."\">suppression</a>";
+            }
             $html .= "</tr>";
         }
         $html .= "</table>";
@@ -38,8 +42,9 @@
     }
     function getListUsers()
     {
-       $query = 'SELECT nom, prenom, idUtilisateur FROM utilisateurs';
-       return getDb()->query($query);
+       $query = 'SELECT nom, prenom, pseudo, idUtilisateur FROM utilisateurs';
+       $answer = getDb()->query($query); //execute the query
+       return $answer->fetchAll(PDO::FETCH_ASSOC); //We make the answer an associotive array
     }
     
     function getUser()
