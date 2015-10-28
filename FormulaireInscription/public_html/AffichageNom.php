@@ -1,5 +1,6 @@
 <?php
     session_start();
+    include 'functionDb.php';
     if(empty($_SESSION['nom']))
     {
         session_write_close(); // to be sure
@@ -9,10 +10,15 @@
     if(isset($_REQUEST['deconnect']) && $_REQUEST['deconnect'] == "yes")
     {
         session_destroy();
+        session_write_close(); // to be sure
         header('Location: ./index.php');
     }
     
-    include 'functionDb.php';
+    if(isset($_REQUEST['boutonAdmin']) && is_numeric($_REQUEST['idUserPromote']))
+    {
+        promoteUser($_REQUEST['idUserPromote']);
+    }
+   
     function getArrayUser()
     {       
         $isAdmin = $_SESSION['isAdmin'];
@@ -23,6 +29,10 @@
         $html .= "<th>Détail</th>";
         $html .= "<th>Modification</th>";
         $html .= "<th>Suppresion</th>";
+        if($isAdmin == 1)
+        {
+            $html .= "<th>Promotion Administrateur</th>";
+        }
         foreach  (getListUsers() as $row) 
         {
             $html .= "<tr>";               
@@ -33,6 +43,11 @@
             {
                 $html .= "<td><a href=\"http://127.0.0.1/siteInscription?value=".$row['idUtilisateur']."\">modification</a>";
                 $html .= "<td><a href=\"http://127.0.0.1/siteInscription/AffichageNom.php?delete=".$row['idUtilisateur']."\">suppression</a>";
+            }
+            if($isAdmin == 1)
+            {
+                $html .= '<td><form method="post" action="AffichageNom.php"><input type="submit" value="Promouvoir" name="boutonAdmin"/>';
+                $html .= '<input type="hidden" value="'.$row['idUtilisateur'].'" name="idUserPromote"/></form></td>';
             }
             $html .= "</tr>";
         }
@@ -53,7 +68,7 @@ and open the template in the editor.
 -->
 <html>
     <head>
-        <title>Affichage des incrit</title>
+        <title>Affichage des incrits</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="style.css">
