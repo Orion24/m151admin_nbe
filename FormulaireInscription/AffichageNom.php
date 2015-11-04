@@ -1,6 +1,8 @@
 <?php
     session_start();
-    include 'functionDb.php';
+    include 'function_read_db.php';
+    include 'function_modify_db.php';
+    include 'function_delete_db.php';
     if(empty($_SESSION['nom']))
     {
         session_write_close(); // to be sure
@@ -61,10 +63,29 @@
         $html .= "</table>";
         return $html;
     }
-
+    function getUser($id)
+    {
+      $tabUser = getInfoUser($id);//We make the answer an associotive array
+      $html = "";
+      if($tabUser != null)//if the user exist
+      {
+          $html .= '<table style="border-collapse: collapse;border:1px solid black;">';
+          $html .= "<th>Nom</th><th>Prenom</th><th>Pseudo</th><th>Description</th><th>Email</th><th>Date de naissance</th>";
+          $html .= "<tr><td>".$tabUser['nom']."</td>";
+          $html .= "<td>".$tabUser['prenom']."</td>";
+          $html .= "<td>".$tabUser['pseudo']."</td>";
+          $html .= "<td>".$tabUser['description']."</td>";
+          $html .= "<td>".$tabUser['email']."</td>";
+          $html .= "<td>".$tabUser['dateNaissance']."</td></tr></table>";
+      }
+      return $html;
+    }
     if(isset($_REQUEST['delete']) && is_numeric($_REQUEST['delete']))
     {
         deleteUser($_REQUEST['delete']);
+        session_destroy();
+        session_write_close(); // to be sure
+        header('Location: ./index.php');
     }
 ?>
 <!DOCTYPE html>
@@ -83,7 +104,8 @@ and open the template in the editor.
     <body>
         <?php
             echo getArrayUser();
-            echo getUser();
+            if(isset($_REQUEST['value'])){
+            echo getUser($_REQUEST['value']);}
         ?>
         <a href="index.php">Formulaire d'inscription</a>
         <a href="AffichageNom.php?deconnect=yes">Se déconnecter</a>

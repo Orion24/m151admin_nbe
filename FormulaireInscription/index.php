@@ -30,6 +30,28 @@
         }
         return true;
     }
+
+    function getUser()
+    {
+        if(isset($_REQUEST['value']) && is_numeric($_REQUEST['value']))
+        {
+            $tabUser = getInfoUser($_REQUEST['value']);//We make the answer an associotive array
+            $html = "";
+            if($tabUser != null)//if the user exist
+            {
+                $html .= '<table style="border-collapse: collapse;border:1px solid black;">';
+                $html .= "<th>Nom</th><th>Prenom</th><th>Pseudo</th><th>Description</th><th>Email</th><th>Date de naissance</th>";
+                $html .= "<tr><td>".$tabUser['nom']."</td>";
+                $html .= "<td>".$tabUser['prenom']."</td>";
+                $html .= "<td>".$tabUser['pseudo']."</td>";
+                $html .= "<td>".$tabUser['description']."</td>";
+                $html .= "<td>".$tabUser['email']."</td>";
+                $html .= "<td>".$tabUser['dateNaissance']."</td></tr></table>";
+            }
+            return $html;
+        }
+    }
+
     if(isset($_REQUEST['idUser']) && is_numeric($_REQUEST['idUser']) && testArg(['', '', '', '', '','','']))
     {
         modifyUser($_REQUEST['nom'], $_REQUEST['prenom'], $_REQUEST['pseudo'], $_REQUEST['pass'], $_REQUEST['description'], $_REQUEST['email'], $_REQUEST['date'], $_REQUEST['idUser']);
