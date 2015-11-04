@@ -44,10 +44,14 @@
                 $html .= "<td><a href=\"http://127.0.0.1/siteInscription?value=".$row['idUtilisateur']."\">modification</a>";
                 $html .= "<td><a href=\"http://127.0.0.1/siteInscription/AffichageNom.php?delete=".$row['idUtilisateur']."\">suppression</a>";
             }
-            if($isAdmin == 1)
+            if($isAdmin == 1 && !$row['isAdmin'])
             {
                 $html .= '<td><form method="post" action="AffichageNom.php"><input type="submit" value="Promouvoir" name="boutonAdmin"/>';
                 $html .= '<input type="hidden" value="'.$row['idUtilisateur'].'" name="idUserPromote"/></form></td>';
+            }
+            else
+            {
+                $html .= "<td></td>";
             }
             $html .= "</tr>";
         }
