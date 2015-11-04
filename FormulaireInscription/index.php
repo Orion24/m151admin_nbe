@@ -1,5 +1,8 @@
 <?php
-    include 'functionDb.php';
+
+    include_once 'function_modify_db.php';
+    include_once 'function_add_db.php';
+    include_once 'function_read_db';
     $nom = "";
     $prenom = "";
     $description = "";
@@ -7,7 +10,7 @@
     $email = "";
     $dateDeNaissance = "";
     $idUser;
-    
+
     function testArg($tab) //Check if there are empty cells
     {
         foreach($tab as $value)
@@ -32,13 +35,13 @@
         modifyUser($_REQUEST['nom'], $_REQUEST['prenom'], $_REQUEST['pseudo'], $_REQUEST['pass'], $_REQUEST['description'], $_REQUEST['email'], $_REQUEST['date'], $_REQUEST['idUser']);
         header('Location: AffichageNom.php');
     }
-    
+
     if(isset($_REQUEST['boutonEnvoyer']) && testArg(['', '', '', '', '','','']))
     {
         insertUser( $_REQUEST['nom'], $_REQUEST['prenom'], $_REQUEST['pseudo'], $_REQUEST['pass'], $_REQUEST['description'], $_REQUEST['email'], $_REQUEST['date']);
         header('Location: AffichageNom.php');
     }
-    
+
     if(isset($_REQUEST['value']) && is_numeric($_REQUEST['value']))
     {
         $tabInfoUser = getInfoUser($_REQUEST['value']);
@@ -49,7 +52,7 @@
         $email = $tabInfoUser['email'];
         $dateDeNaissance = $tabInfoUser['dateNaissance'];
         $idUser = $_REQUEST['value'];
-    }   
+    }
 ?>
 <!DOCTYPE html>
 <!--
@@ -79,6 +82,6 @@ and open the template in the editor.
             <input type="submit" value="Envoyer" name="boutonEnvoyer"/>
             <input type="hidden" value="<?= $idUser ?>" name="idUser"/>
             <a href="./login.php">Connexion</a>
-        </form>      
+        </form>
     </body>
 </html>
