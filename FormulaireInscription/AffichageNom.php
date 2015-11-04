@@ -6,21 +6,21 @@
         session_write_close(); // to be sure
         header('Location: ./login.php');
     }
-    
+
     if(isset($_REQUEST['deconnect']) && $_REQUEST['deconnect'] == "yes")
     {
         session_destroy();
         session_write_close(); // to be sure
         header('Location: ./index.php');
     }
-    
+
     if(isset($_REQUEST['boutonAdmin']) && is_numeric($_REQUEST['idUserPromote']))
     {
         promoteUser($_REQUEST['idUserPromote']);
     }
-   
+
     function getArrayUser()
-    {       
+    {
         $isAdmin = $_SESSION['isAdmin'];
         $html = "";
         $html .= '<table style="border-collapse: collapse;border:1px solid black;">';
@@ -33,16 +33,19 @@
         {
             $html .= "<th>Promotion Administrateur</th>";
         }
-        foreach  (getListUsers() as $row) 
+        foreach  (getListUsers() as $row)
         {
-            $html .= "<tr>";               
+            $html .= "<tr>";
             $html .= "<td>".$row['nom']."</td>";
             $html .= "<td>".$row['prenom']."</td>";
-            $html .= "<td><a href=\"http://127.0.0.1/siteInscription/AffichageNom.php?value=".$row['idUtilisateur']."\">détail</a>";
+            $html .= "<td><a href=\"http://127.0.0.1/siteInscription/AffichageNom.php?value=".$row['idUtilisateur']."\">détail</a></td>";
             if($isAdmin==1 || $_SESSION['nom'] == $row['pseudo'])
             {
-                $html .= "<td><a href=\"http://127.0.0.1/siteInscription?value=".$row['idUtilisateur']."\">modification</a>";
-                $html .= "<td><a href=\"http://127.0.0.1/siteInscription/AffichageNom.php?delete=".$row['idUtilisateur']."\">suppression</a>";
+                $html .= "<td><a href=\"http://127.0.0.1/siteInscription?value=".$row['idUtilisateur']."\">modification</a></td>";
+                $html .= "<td><a href=\"http://127.0.0.1/siteInscription/AffichageNom.php?delete=".$row['idUtilisateur']."\">suppression</a></td>";
+            }
+            else {
+              $html .= "<td></td><td></td>";
             }
             if($isAdmin == 1 && !$row['isAdmin'])
             {
@@ -78,7 +81,7 @@ and open the template in the editor.
         <link rel="stylesheet" href="style.css">
     </head>
     <body>
-        <?php 
+        <?php
             echo getArrayUser();
             echo getUser();
         ?>
