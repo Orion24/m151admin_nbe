@@ -1,5 +1,5 @@
 <?php
-    include_once 'function_read_db.php';
+    include 'functionDb.php';
     $nom = "";
     session_start();
 
@@ -15,7 +15,7 @@
         $nom = $_REQUEST['nom'];
         if (count($userlogin) > 0) {
             $_SESSION['nom'] = $userlogin['pseudo'];
-            $_SESSION['isAdmin'] = $userlogin['isAdmin'];
+            $_SESSION['isAdmin'] = $userlogin['isAdmin'];       
             header('Location: ./AffichageNom.php');
         }
     }

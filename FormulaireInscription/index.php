@@ -2,7 +2,7 @@
 
     include_once 'function_modify_db.php';
     include_once 'function_add_db.php';
-    include_once 'function_read_db';
+    include_once 'function_read_db.php';
     $nom = "";
     $prenom = "";
     $description = "";
