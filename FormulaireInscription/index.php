@@ -3,12 +3,12 @@
     include_once 'function_modify_db.php';
     include_once 'function_add_db.php';
     include_once 'function_read_db.php';
-    $nom = "";
-    $prenom = "";
-    $description = "";
-    $pseudo = "";
-    $email = "";
-    $dateDeNaissance = "";
+    $nom = isset($_REQUEST['nom']) ? $_REQUEST['nom'] : "";
+    $prenom = isset($_REQUEST['prenom']) ? $_REQUEST['prenom'] : "";
+    $description = isset($_REQUEST['description']) ? $_REQUEST['description'] : "";
+    $pseudo = isset($_REQUEST['pseudo']) ? $_REQUEST['pseudo'] : "";
+    $email = isset($_REQUEST['email']) ? $_REQUEST['email'] : "";
+    $dateDeNaissance = isset($_REQUEST['dateDeNaissance']) ? $_REQUEST['dateDeNaissance'] : "";
     $idUser;
 
     function testArg($tab) //Check if there are empty cells
@@ -98,7 +98,7 @@ and open the template in the editor.
             <label for="pseudo">Votre Pseudo</label> : <input type="text" name="pseudo" id="pseudo" maxlength="20" value="<?= $pseudo ?>" required /> <br />
             <label for="pass">Votre mot de passe :</label><input type="password" name="pass" id="pass" required /> <br />
             <label for="passconf">Confirmer mot de passe :</label><input type="password" name="passconf" id="passconf" required /> <br />
-            <label for="description">Mini description :</label><textarea name="description" id="description" maxlength="100" value="<?= $description ?>" ></textarea> <br />
+            <label for="description">Mini description :</label><textarea name="description" id="description" maxlength="100"><?= $description ?></textarea> <br />
             <label for="email">Votre E-mail</label> : <input type="email" name="email" id="email" maxlength="200" value="<?= $email ?>" required /> <br />
             <label for="date">Votre Date de naissance</label> : <input type="date" name="date" id="date" value="<?= $dateDeNaissance ?>" required /><br />
             <input type="submit" value="Envoyer" name="boutonEnvoyer"/>
