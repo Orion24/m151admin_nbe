@@ -17,7 +17,7 @@
         {
             if($value == $_REQUEST['description'])
             {
-                if(!isset($value)) { 
+                if(!isset($value)) {
                     return false;
                 }
             }
@@ -28,13 +28,11 @@
         return true;
     }
 
-	//TODO passez le user à traiter en paramètres ici aussi, cela nous permettra d'appeler votre fonction pour afficher
-	//un utilisateur sans être dépendant de $_REQUEST
-    function getUser()
+    function getUser($idUser)
     {
-        if(isset($_REQUEST['value']) && is_numeric($_REQUEST['value']))
+        if(is_numeric($idUser))
         {
-            $tabUser = getInfoUser($_REQUEST['value']);//We make the answer an associotive array
+            $tabUser = getInfoUser($idUser);//We make the answer an associotive array
             $html = "";
             if($tabUser != null)//if the user exist
             {
