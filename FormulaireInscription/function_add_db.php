@@ -10,9 +10,9 @@ function insertUser($lastname, $firstname, $pseudo, $pass, $description, $email,
       $request->bindParam(':description', $description, PDO::PARAM_STR);
       $request->bindParam(':email', $email, PDO::PARAM_STR);
       $request->bindParam(':date', $date, PDO::PARAM_STR);
-      $request->execute();
+      return $request->execute();
   }
   catch (PDOException $e) {
-      die('Erreur : ' . $e->getMessage());
+      return false;
   }
 }
