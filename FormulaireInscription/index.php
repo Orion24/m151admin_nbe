@@ -17,10 +17,7 @@
         {
             if($value == $_REQUEST['description'])
             {
-                if(isset($value)) { //TODO inversez le test afin d'avoir directement un return false plutôt que un continue et un else
-                    continue;
-                }
-                else {
+                if(!isset($value)) { 
                     return false;
                 }
             }
