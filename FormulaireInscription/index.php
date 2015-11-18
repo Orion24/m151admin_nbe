@@ -51,8 +51,13 @@
 
     if(isset($_REQUEST['idUser']) && is_numeric($_REQUEST['idUser']) && testArg(['', '', '', '', '','','']))
     {
-        modifyUser($_REQUEST['nom'], $_REQUEST['prenom'], $_REQUEST['pseudo'], $_REQUEST['pass'], $_REQUEST['description'], $_REQUEST['email'], $_REQUEST['date'], $_REQUEST['idUser']);
-        header('Location: AffichageNom.php');
+        if(modifyUser($_REQUEST['nom'], $_REQUEST['prenom'], $_REQUEST['pseudo'], $_REQUEST['pass'], $_REQUEST['description'], $_REQUEST['email'], $_REQUEST['date'], $_REQUEST['idUser']))
+        {
+          header('Location: AffichageNom.php');
+        }
+        else {
+          echo "<p>Une erreur s'est produite</p>" ;
+        }
     }
 
     if(isset($_REQUEST['boutonEnvoyer']) && testArg(['', '', '', '', '','','']))

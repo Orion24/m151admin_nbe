@@ -43,7 +43,7 @@
             $html .= "<td><a href=\"http://127.0.0.1/siteInscription/AffichageNom.php?value=".$row['idUtilisateur']."\">détail</a></td>";
             if($isAdmin==1 || $_SESSION['nom'] == $row['pseudo'])
             {
-                $html .= "<td><a href=\"http://127.0.0.1/siteInscription?value=".$row['idUtilisateur']."\">modification</a></td>";
+                $html .= "<td><a href=\"http://127.0.0.1/siteInscription?value=".$row['idUtilisateur']."&nom=".$row['nom']."&prenom=".$row['prenom']."&pseudo=".$row['pseudo']."&email=".$row['email']."&description=".$row['description']."&date=".$row['dateNaissance']."\">modification</a></td>";
                 $html .= "<td><a href=\"http://127.0.0.1/siteInscription/AffichageNom.php?delete=".$row['idUtilisateur']."\">suppression</a></td>";
             }
             else {

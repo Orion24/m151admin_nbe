@@ -16,7 +16,7 @@ function login($username, $pass) {
 
 function getListUsers()
     {
-       $query = 'SELECT nom, prenom, pseudo, idUtilisateur, isAdmin FROM utilisateurs';
+       $query = 'SELECT * FROM utilisateurs';
        $answer = getDb()->query($query); //execute the query
        return $answer->fetchAll(PDO::FETCH_ASSOC); //We make the answer an associotive array
     }
