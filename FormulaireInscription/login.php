@@ -17,6 +17,7 @@
         if (count($userlogin) > 0) {
             $_SESSION['nom'] = $userlogin['pseudo'];
             $_SESSION['isAdmin'] = $userlogin['isAdmin'];
+            $_SESSION['idUtilisateur'] = $userlogin['idUtilisateur'];
             header('Location: ./AffichageNom.php');
             exit();
         }

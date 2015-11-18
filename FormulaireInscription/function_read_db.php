@@ -7,7 +7,7 @@ function getInfoUser($idUser) {
 }
 
 function login($username, $pass) {
-    $request = getDb()->prepare("SELECT pseudo, motDePasse, isAdmin FROM ".DB_TABLE_USER." WHERE pseudo = :pseudo AND motDePasse = SHA1(:pass)");
+    $request = getDb()->prepare("SELECT pseudo, motDePasse, isAdmin, idUtilisateur FROM ".DB_TABLE_USER." WHERE pseudo = :pseudo AND motDePasse = SHA1(:pass)");
     $request->bindParam(':pseudo', $username);
     $request->bindParam(':pass', $pass);
     $request->execute();
