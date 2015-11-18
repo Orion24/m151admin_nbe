@@ -6,6 +6,7 @@
     if(isset($_SESSION['nom']))
     {
         header('Location: ./AffichageNom.php');
+        exit();
     }
 
     if (isset($_REQUEST['login'])) {
@@ -17,6 +18,7 @@
             $_SESSION['nom'] = $userlogin['pseudo'];
             $_SESSION['isAdmin'] = $userlogin['isAdmin'];
             header('Location: ./AffichageNom.php');
+            exit();
         }
     }
 ?>

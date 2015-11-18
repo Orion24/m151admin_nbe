@@ -7,6 +7,7 @@
     {
         session_write_close(); // to be sure
         header('Location: ./login.php');
+        exit();
     }
 
     if(isset($_REQUEST['deconnect']) && $_REQUEST['deconnect'] == "yes")
@@ -14,6 +15,7 @@
         session_destroy();
         session_write_close(); // to be sure
         header('Location: ./index.php');
+        exit();
     }
 
     if(isset($_REQUEST['boutonAdmin']) && is_numeric($_REQUEST['idUserPromote']))
@@ -86,6 +88,7 @@
         session_destroy();
         session_write_close(); // to be sure
         header('Location: ./index.php');
+        exit();
     }
 ?>
 <!DOCTYPE html>
