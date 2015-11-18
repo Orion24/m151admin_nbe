@@ -60,9 +60,9 @@
         }
     }
 
-    if(isset($_REQUEST['boutonEnvoyer']) && testArg(['', '', '', '', '','','']))
+    if(isset($_REQUEST['boutonEnvoyer']) && testArg(['', '', '', '', '','','','']))
     {
-        if(insertUser( $_REQUEST['nom'], $_REQUEST['prenom'], $_REQUEST['pseudo'], $_REQUEST['pass'], $_REQUEST['description'], $_REQUEST['email'], $_REQUEST['date']))
+        if(insertUser( $_REQUEST['nom'], $_REQUEST['prenom'], $_REQUEST['pseudo'], $_REQUEST['pass'], $_REQUEST['description'], $_REQUEST['email'], $_REQUEST['date'], $_REQUEST['classe']))
         {
             header('Location: AffichageNom.php');
         }
@@ -112,7 +112,7 @@ and open the template in the editor.
             <label for="classe">Votre classe :</label><select name="classe" required>
             <?php
              foreach ($classes as $value) {
-                echo '<option>'.$value['nom'].'</option>';
+                echo "<option value=\"".$value['idClasse']."\">".$value['nom']."</option>";
              }
              ?>
             </select>
