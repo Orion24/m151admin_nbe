@@ -2,7 +2,7 @@
 require_once 'functionDb.php';
 function modifyUser($lastname, $firstname, $pseudo, $pass, $description, $email, $date, $idUser) {
   try{
-    $request = getDb()->prepare("UPDATE ".DB_NAME.".`utilisateurs` SET `nom` = :lastname, `prenom` = :firstname,  `pseudo` = :pseudo, `motDePasse` = SHA1(:pass), `description` = :description, `email` = :email, `dateNaissance` = :date WHERE `utilisateurs`.`idUtilisateur` = " . $idUser . ";");
+    $request = getDb()->prepare("UPDATE ".DB_NAME.".".DB_TABLE_USER." SET `nom` = :lastname, `prenom` = :firstname,  `pseudo` = :pseudo, `motDePasse` = SHA1(:pass), `description` = :description, `email` = :email, `dateNaissance` = :date WHERE `utilisateurs`.`idUtilisateur` = " . $idUser . ";");
     $request->bindParam(':lastname', $lastname, PDO::PARAM_STR);
     $request->bindParam(':firstname', $firstname, PDO::PARAM_STR);
     $request->bindParam(':pseudo', $pseudo, PDO::PARAM_STR);
@@ -19,7 +19,7 @@ function modifyUser($lastname, $firstname, $pseudo, $pass, $description, $email,
 
 function promoteUser($idUser)
 {
-    $request = getDb()->prepare("UPDATE ".DB_NAME.".`utilisateurs` SET `isAdmin` = '1' WHERE `utilisateurs`.`idUtilisateur` = :idUser;");
+    $request = getDb()->prepare("UPDATE ".DB_NAME.".".DB_TABLE_USER." SET `isAdmin` = '1' WHERE `utilisateurs`.`idUtilisateur` = :idUser;");
     $request->bindParam(':idUser', $idUser, PDO::PARAM_INT);
     $request->execute();
 }

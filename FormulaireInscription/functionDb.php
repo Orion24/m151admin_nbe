@@ -4,6 +4,7 @@
     DEFINE('DB_NAME', "m151admin_nbe");
     DEFINE('DB_USER', "m151admin");
     DEFINE('DB_PASS', "m151admin");
+    DEFINE('DB_TABLE_USER', "utilisateurs");
 
     function getDb() {
         static $dbb = null;
