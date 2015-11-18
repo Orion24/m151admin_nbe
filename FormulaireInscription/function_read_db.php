@@ -27,3 +27,10 @@ function getClass()
   $answer = getDb()->query($query); //execute the query
   return $answer->fetchAll(PDO::FETCH_ASSOC); //We make the answer an associotive array
 }
+
+function getSport()
+{
+  $query = 'SELECT * FROM sports';
+  $answer = getDb()->query($query); //execute the query
+  return $answer->fetchAll(PDO::FETCH_ASSOC); //We make the answer an associotive array
+}

@@ -65,6 +65,21 @@
         $html .= "</table>";
         return $html;
     }
+
+    function getFormSport()
+    {
+        $html = '<form method="post" action="AffichageNom.php" id="formInscription"><h1>Choix des sports</h1>';
+        for ($i=1; $i <= 4; $i++) {
+        $html .= "<label for=\"sport".$i."\"> Sport ".$i."</label><select name=\"Sport".$i."\" required>";
+        foreach (getSport() as $value) {
+          $html .= "<option value=\"".$value['idSport']."\">".$value['nom']."</option>";
+        }
+        $html .= "</select><br/>";
+      }
+        $html .= '<input type="submit" value="Envoyer" name="boutonEnvoyer"/></form>';
+        return $html;
+    }
+
     function getUser($id)
     {
       $tabUser = getInfoUser($id);//We make the answer an associotive array
@@ -90,6 +105,12 @@
         header('Location: ./index.php');
         exit();
     }
+    if(isset($_REQUEST['boutonEnvoyer']))
+    {
+        for ($i=1; $i <= 4 ; $i++) {
+          add_choiceSport($_SESSION['idUtilisateur'], $_REQUEST['Sport'.$i]); //TODO : Faire la fonction d'insertion dans la base de données
+        }
+    }
 ?>
 <!DOCTYPE html>
 <!--
@@ -109,6 +130,7 @@ and open the template in the editor.
             echo getArrayUser();
             if(isset($_REQUEST['value'])){
             echo getUser($_REQUEST['value']);}
+            echo getFormSport();
         ?>
         <a href="index.php">Formulaire d'inscription</a>
         <a href="AffichageNom.php?deconnect=yes">Se déconnecter</a>
