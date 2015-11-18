@@ -82,6 +82,7 @@
         $dateDeNaissance = $tabInfoUser['dateNaissance'];
         $idUser = $_REQUEST['value'];
     }
+    $classes = getClass();
 ?>
 <!DOCTYPE html>
 <!--
@@ -108,6 +109,13 @@ and open the template in the editor.
             <label for="description">Mini description :</label><textarea name="description" id="description" maxlength="100"><?= $description ?></textarea> <br />
             <label for="email">Votre E-mail</label> : <input type="email" name="email" id="email" maxlength="200" value="<?= $email ?>" required /> <br />
             <label for="date">Votre Date de naissance</label> : <input type="date" name="date" id="date" value="<?= $dateDeNaissance ?>" required /><br />
+            <label for="classe">Votre classe :</label><select name="classe" required>
+            <?php
+             foreach ($classes as $value) {
+                echo '<option>'.$value['nom'].'</option>';
+             }
+             ?>
+            </select>
             <input type="submit" value="Envoyer" name="boutonEnvoyer"/>
             <input type="hidden" value="<?= $idUser ?>" name="idUser"/>
             <a href="./login.php">Connexion</a>

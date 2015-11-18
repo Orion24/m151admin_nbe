@@ -20,3 +20,10 @@ function getListUsers()
        $answer = getDb()->query($query); //execute the query
        return $answer->fetchAll(PDO::FETCH_ASSOC); //We make the answer an associotive array
     }
+
+function getClass()
+{
+  $query = 'SELECT nom FROM classes';
+  $answer = getDb()->query($query); //execute the query
+  return $answer->fetchAll(PDO::FETCH_ASSOC); //We make the answer an associotive array
+}
