@@ -20,3 +20,18 @@ function insertUser($lastname, $firstname, $pseudo, $pass, $description, $email,
       //die($e->getMessage());
   }
 }
+
+function insertSport($idUser, $idSport, $orderchoice)
+{
+  try{
+    $request = getDb()->prepare("INSERT INTO ".DB_NAME.".choix (`idSport`, `idEleve`, `ordrePref`) VALUES (:idSport,:idEleve, :order)");
+    $request->bindParam(':idSport', $idSport, PDO::PARAM_INT);
+    $request->bindParam(':idEleve', $idUser, PDO::PARAM_INT);
+    $request->bindParam(':order', $orderchoice, PDO::PARAM_INT);
+    return $request->execute();
+  }
+  catch (PDOException $e) {
+      //return false;
+      die($e->getMessage());
+  }
+}

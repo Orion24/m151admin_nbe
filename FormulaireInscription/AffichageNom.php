@@ -1,8 +1,9 @@
 <?php
     session_start();
-    include 'function_read_db.php';
-    include 'function_modify_db.php';
-    include 'function_delete_db.php';
+    include_once 'function_read_db.php';
+    include_once 'function_modify_db.php';
+    include_once 'function_delete_db.php';
+    include_once 'function_add_db.php';
     if(empty($_SESSION['nom']))
     {
         session_write_close(); // to be sure
@@ -108,7 +109,11 @@
     if(isset($_REQUEST['boutonEnvoyer']))
     {
         for ($i=1; $i <= 4 ; $i++) {
-          add_choiceSport($_SESSION['idUtilisateur'], $_REQUEST['Sport'.$i]); //TODO : Faire la fonction d'insertion dans la base de données
+          if(!insertSport($_SESSION['idUtilisateur'], $_REQUEST['Sport'.$i], $i))
+          {
+              echo "<p>Une erreur s'est produite</p>";
+              break;
+          }
         }
     }
 ?>
@@ -124,6 +129,9 @@ and open the template in the editor.
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="style.css">
+        <script>
+
+        </script>
     </head>
     <body>
         <?php
