@@ -16,22 +16,33 @@ function insertUser($lastname, $firstname, $pseudo, $pass, $description, $email,
       return $request->execute();
   }
   catch (PDOException $e) {
-      return false;
-      //die($e->getMessage());
+    throw $e;
   }
 }
 
-function insertSport($idUser, $idSport, $orderchoice)
+function insertSport($idUser, $idSport)
 {
   try{
-    $request = getDb()->prepare("INSERT INTO ".DB_NAME.".choix (`idSport`, `idEleve`, `ordrePref`) VALUES (:idSport,:idEleve, :order)");
-    $request->bindParam(':idSport', $idSport, PDO::PARAM_INT);
-    $request->bindParam(':idEleve', $idUser, PDO::PARAM_INT);
-    $request->bindParam(':order', $orderchoice, PDO::PARAM_INT);
-    return $request->execute();
+    getDb()->beginTransaction();
+    for ($i=0; $i < 4 ; $i++) {
+      if(count(getIdSportByUserAndIdSport($idUser, $idSport[$i])) == 0)
+      {
+        $order = $i + 1;
+        $request = getDb()->prepare("INSERT INTO ".DB_NAME.".choix (`idSport`, `idEleve`, `ordrePref`) VALUES (:idSport,:idEleve, :order)");
+        $request->bindParam(':idSport', $idSport[$i], PDO::PARAM_INT);
+        $request->bindParam(':idEleve', $idUser, PDO::PARAM_INT);
+        $request->bindParam(':order', $order, PDO::PARAM_INT);
+        $request->execute();
+      }
+      else {
+        throw new Exception("Choix deja pris par l'utilisateur");
+        break;
+      }
+    }
+    getDb()->commit();
   }
   catch (PDOException $e) {
-      //return false;
-      die($e->getMessage());
+      getDb()->rollback();
+      throw $e;
   }
 }

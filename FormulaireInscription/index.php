@@ -63,13 +63,19 @@
 
     if(isset($_REQUEST['boutonEnvoyer']) && testArg(['', '', '', '', '','','','']))
     {
-        if(insertUser( $_REQUEST['nom'], $_REQUEST['prenom'], $_REQUEST['pseudo'], $_REQUEST['pass'], $_REQUEST['description'], $_REQUEST['email'], $_REQUEST['date'], $_REQUEST['classe']))
+        try
         {
+            insertUser( $_REQUEST['nom'], $_REQUEST['prenom'], $_REQUEST['pseudo'], $_REQUEST['pass'], $_REQUEST['description'], $_REQUEST['email'], $_REQUEST['date'], $_REQUEST['classe'])
             header('Location: AffichageNom.php');
             exit();
         }
-        else {
-          echo "<p>Une erreur s'est produite</p>" ;
+        catch(Exception $e)
+        {
+           echo $e->getMessage();
+        }
+        catch(PDOException $e)
+        {
+          echo $e->getMessage();
         }
     }
 

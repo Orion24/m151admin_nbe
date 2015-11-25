@@ -108,12 +108,20 @@
     }
     if(isset($_REQUEST['boutonEnvoyer']))
     {
-        for ($i=1; $i <= 4 ; $i++) {
-          if(!insertSport($_SESSION['idUtilisateur'], $_REQUEST['Sport'.$i], $i))
-          {
-              echo "<p>Une erreur s'est produite</p>";
-              break;
-          }
+        $arrayChoiceSport = array();
+        for ($i=1; $i <= 4; $i++) {
+          array_push($arrayChoiceSport, $_REQUEST['Sport'.$i]);
+        }
+        try{
+          insertSport($_SESSION['idUtilisateur'], $arrayChoiceSport);
+        }
+        catch(Exception $e)
+        {
+           echo $e->getMessage();
+        }
+        catch(PDOException $e)
+        {
+          echo $e->getMessage();
         }
     }
 ?>
