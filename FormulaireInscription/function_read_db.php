@@ -43,3 +43,11 @@ function getIdSportByUserAndIdSport($idUser, $idSport)//We check here if there i
   $request->execute();
   return $request->fetchAll(PDO::FETCH_ASSOC);
 }
+
+function getIfSportIsEnabled($sport)
+{
+  $request = getDb()->prepare("SELECT actif FROM sport WHERE nom = :sport");
+  $request->bindParam(':sport', $sport, PDO::PARAM_STR);
+  $request->execute();
+  return $request->fetchAll(PDO::FETCH_ASSOC);
+}
